@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Quiz Timer</title>
+</head>
+<body>
+    <div id="header">
+        <h1>Quiz Timer</h1>
+    </div>
+    <div id="body">
+        <div id="condition-container">
+            <div id="form-container">
+                <input type="text" id="no-question" placeholder="Number of Questions"><br />
+                <input type="text" id="time-avail" placeholder="Time Available in MN"><br />
+                <input type="button" id="condition-start-button" value="START"><br />
+            </div>
+        </div>
+        <div id="display-container">
+            <div id="display-container-top">
+                <div id="display-container-top-left">
+                    <span id="question-displayer">Q0</span>
+                </div>
+                <div id="display-container-top-right">
+                    <span id="time-displayer">0</span>
+                </div>
+            </div>
+            <div id="display-container-bottom">
+                <div id="left-display-details">
+                    <p><span id="no-question-extract">0</span> Qs | <span id="time-avail-extract">0</span> MNs</p>
+                </div>
+                <div id="right-display-control">
+                    <input type="button" id="display-container-next-button" value="NEXT">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script/script.js"></script>
+</body>
+</html>
