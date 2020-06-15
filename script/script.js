@@ -33,6 +33,9 @@ $(document).ready(function() {
         $('#time-avail-extract').text(timeAvail);
 
         //updates question displayer
+        $('#question-displayer').css('color', '#606060');
+        $('#left-display-details p').css('color', '#606060');
+
         var i = 0;
     
         qCountdown();
@@ -49,6 +52,10 @@ $(document).ready(function() {
                 //reset extracts to default
                 $('#no-question-extract').text(0);
                 $('#time-avail-extract').text(0);
+
+                //reset question displayer color to default
+                $('#question-displayer').css('color', '#A9A9A9');
+                $('#left-display-details p').css('color', '#A9A9A9');
 
                 //enable start button
                 $('#condition-start-button').prop('disabled', false);
