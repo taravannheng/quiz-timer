@@ -97,7 +97,7 @@ $(document).ready(function() {
                         if ((timePerQ - j) > (timePerPhase * 2)) {
                             $('#time-displayer').css('color', '#A9DC76');
                         }
-                        else if ((timePerQ - j) > (timePerPhase) && (timePerQ - j) < (timePerPhase * 2)) {
+                        else if ((timePerQ - j) > (timePerPhase) && (timePerQ - j) <= (timePerPhase * 2)) {
                             $('#time-displayer').css('color', '#FFD866');
                         }
                         else {
