@@ -4,6 +4,7 @@ $(document).ready(function() {
             next button - button is clicked > add remaining time to timePerQ
             freeze inputs - start button is clicked > freeze the inputs     
             colorize timer - change color of timer through 3 phases: green, yellow, red
+            reset button - button is clicked > reset displayer to default > enable the form to receive input again
     */
 
 
