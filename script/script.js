@@ -3,6 +3,7 @@ $(document).ready(function() {
         Next Updates:
             next button - button is clicked > add remaining time to timePerQ
             reset button - button is clicked > reset displayer to default > enable the form to receive input again
+            decimal timePerQ - handle timePerQ in case it is decimal
     */
 
 
