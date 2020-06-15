@@ -1,15 +1,17 @@
 $(document).ready(function() {
     /*
         Next Updates:
-            next button - button is clicked > add remaining time to timePerQ
-            freeze start button - start button is clicked > freeze the start button     
+            next button - button is clicked > add remaining time to timePerQ     
             colorize timer - change color of timer through 3 phases: green, yellow, red
             reset button - button is clicked > reset displayer to default > enable the form to receive input again
     */
 
 
-    //grab input data
+    
     $('#condition-start-button').on("click", function() {
+
+        //disable start button
+        $('#condition-start-button').prop('disabled', true);
 
         //fetch condition details
         var noQuestion = $('#no-question').val();
@@ -47,6 +49,9 @@ $(document).ready(function() {
                 //reset extracts to default
                 $('#no-question-extract').text(0);
                 $('#time-avail-extract').text(0);
+
+                //enable start button
+                $('#condition-start-button').prop('disabled', false);
 
                 //stop the timer
                 clearInterval(qTimer);
