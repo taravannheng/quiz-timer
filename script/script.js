@@ -34,7 +34,6 @@ $(document).ready(function() {
         //updates question displayer
         $('#question-displayer').css('color', '#606060');
         $('#left-display-details p').css('color', '#606060');
-        $('#time-displayer').css('color', '#A9DC76');
 
         var i = 0;
     
@@ -69,6 +68,8 @@ $(document).ready(function() {
                 $('#question-displayer').text("Q" + i);
                 $('#time-displayer').text(timePerQ);
 
+                $('#time-displayer').css('color', '#A9DC76');
+
                 //tTimer section
                 var j = 1;
                 var timePerPhase = timePerQ / 3;
@@ -80,9 +81,6 @@ $(document).ready(function() {
                         if (i <= noQuestion) {
                             //reset the timer
                             $('#time-displayer').text(timePerQ);
-
-                            //reset the color to first phase
-                            $('#time-displayer').css('color', '#A9DC76');
                         } else {
                             $('#time-displayer').text(0);
                         }
