@@ -2,7 +2,7 @@ $(document).ready(function() {
     /*
         Next Updates:
             next button - button is clicked > add remaining time to timePerQ
-            freeze inputs - start button is clicked > freeze the inputs     
+            freeze start button - start button is clicked > freeze the start button     
             colorize timer - change color of timer through 3 phases: green, yellow, red
             reset button - button is clicked > reset displayer to default > enable the form to receive input again
     */
