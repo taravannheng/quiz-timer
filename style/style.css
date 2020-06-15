@@ -162,18 +162,9 @@ h1 {
     color: #A9A9A9;
 }
 
-/*Note: change the above color to #AB9DF2
-once conditions are filled*/
-
 #display-container-top-right span {
     color: #A9A9A9;
 }
-
-/*Note: change the above color to 
-#A9DC76 first phase
-#FFD866 second phase
-#FF6188 third phase
-once conditions are filled*/
 
 #display-container-bottom {
     width: 90%;
