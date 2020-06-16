@@ -2,19 +2,20 @@ $(document).ready(function() {
     /*
         Next Updates:
             decimal timePerQ - handle timePerQ in case it is decimal
+            input validation - check for 0 and negative values
     */
 
     
 
 
     //timer function
-    $('#condition-start-button').on("click", function() {
+    $('#start-button').on("click", function() {
 
         //disable start button
-        $('#condition-start-button').prop('disabled', true);
+        $('#start-button').prop('disabled', true);
 
         //change start button color to #A9A9A9 to disable the hover and focus effect
-        $('#condition-start-button').css({
+        $('#start-button').css({
             'background': '#BEBEBE',
             'color': '#606060'
         });
@@ -39,22 +40,22 @@ $(document).ready(function() {
 
         //fetch condition details
         var noQuestion = $('#no-question').val();
-        var timeAvail = $('#time-avail').val();
+        var duration = $('#duration').val();
 
         //convert str to int
         noQuestion = parseInt(noQuestion);
-        timeAvail = parseInt(timeAvail);
+        duration = parseInt(duration);
 
         //revert condition details to defaults
         $('#no-question').val("");
-        $('#time-avail').val("");
+        $('#duration').val("");
 
         //operation: question/time
-        var timePerQ = (timeAvail / noQuestion) * 60;
+        var timePerQ = (duration / noQuestion) * 60;
 
         //update display extract
         $('#no-question-extract').text(noQuestion);
-        $('#time-avail-extract').text(timeAvail);
+        $('#duration-extract').text(duration);
 
         //updates question displayer
         $('#question-displayer').css('color', '#606060');
@@ -75,7 +76,7 @@ $(document).ready(function() {
 
                 //reset extracts to default
                 $('#no-question-extract').text(0);
-                $('#time-avail-extract').text(0);
+                $('#duration-extract').text(0);
 
                 //reset question displayer color to default
                 $('#question-displayer').css('color', '#A9A9A9');
@@ -87,7 +88,7 @@ $(document).ready(function() {
                 $('#time-displayer').css('color', '#A9A9A9');
 
                 //enable start button
-                $('#condition-start-button').prop('disabled', false);
+                $('#start-button').prop('disabled', false);
 
                 //stop the timer
                 clearInterval(qTimer);
@@ -142,7 +143,7 @@ $(document).ready(function() {
 
                     //reset extracts to default
                     $('#no-question-extract').text(0);
-                    $('#time-avail-extract').text(0);
+                    $('#duration-extract').text(0);
 
                     //reset question and time displayers color to default
                     $('#question-displayer').css('color', '#A9A9A9');
@@ -165,7 +166,7 @@ $(document).ready(function() {
                     });
 
                     //start but
-                    $('#condition-start-button').hover(function() {
+                    $('#start-button').hover(function() {
                         $(this).css({
                             'background': '#78DCE8',
                             'color': '#FFF'
@@ -178,7 +179,7 @@ $(document).ready(function() {
                     });
 
                     //enable start button
-                    $('#condition-start-button').prop('disabled', false);
+                    $('#start-button').prop('disabled', false);
                     
 
                     //stop qTimer and tTimer
