@@ -1,17 +1,41 @@
 $(document).ready(function() {
     /*
         Next Updates:
-            next button - button is clicked > add remaining time to timePerQ
-            reset button - button is clicked > reset displayer to default > enable the form to receive input again
             decimal timePerQ - handle timePerQ in case it is decimal
     */
 
-
     
+
+
+    //timer function
     $('#condition-start-button').on("click", function() {
 
         //disable start button
         $('#condition-start-button').prop('disabled', true);
+
+        //change start button color to #A9A9A9 to disable the hover and focus effect
+        $('#condition-start-button').css({
+            'background': '#BEBEBE',
+            'color': '#606060'
+        });
+
+        //change reset button color to #FF6188 in hover and #BEBEBE out hover
+        $('#reset-button').hover(function() {
+            $(this).css({
+                'background': '#FF6188',
+                'color': '#FFF'
+            });
+        }, function() {
+            $(this).css({
+                'background': '#BEBEBE',
+                'color': '#606060'
+            });
+        });
+
+        //enable reset button
+        $('#reset-button').prop('disabled', false);
+
+        
 
         //fetch condition details
         var noQuestion = $('#no-question').val();
@@ -38,7 +62,7 @@ $(document).ready(function() {
 
         var i = 0;
     
-        qCountdown();
+        qCountdown();   //start the interval manually for the first time
 
         var qTimer = setInterval(qCountdown, timePerQ*1000);
 
@@ -55,6 +79,8 @@ $(document).ready(function() {
 
                 //reset question displayer color to default
                 $('#question-displayer').css('color', '#A9A9A9');
+
+                //reest extracts colors to default
                 $('#left-display-details p').css('color', '#A9A9A9');
 
                 //reset time displayer color to default
@@ -102,19 +128,63 @@ $(document).ready(function() {
                         else {
                             $('#time-displayer').css('color', '#FF6188');
                         }
-                        
-
-                        /*Note: change the above color to 
-                                #A9DC76 first phase     green
-                                #FFD866 second phase    yellow
-                                #FF6188 third phase     pink
-                                once conditions are filled*/
-
-
+                    
                         //increment
                         j++;
                     }
                 }
+
+                //reset button function
+                $('#reset-button').on('click', function() {
+                    //reset question and time displayers to default
+                    $('#question-displayer').text("Q0");
+                    $('#time-displayer').text(0);
+
+                    //reset extracts to default
+                    $('#no-question-extract').text(0);
+                    $('#time-avail-extract').text(0);
+
+                    //reset question and time displayers color to default
+                    $('#question-displayer').css('color', '#A9A9A9');
+                    $('#time-displayer').css('color', '#A9A9A9');
+
+                    //reset extracts colors to default
+                    $('#left-display-details p').css('color', '#A9A9A9');
+
+                    //reset reset button to default
+                    $('#reset-button').hover(function() {
+                        $(this).css({
+                            'background': '#BEBEBE',
+                            'color': '#606060'
+                        });
+                    }, function() {
+                        $(this).css({
+                            'background': '#BEBEBE',
+                            'color': '#606060'
+                        });
+                    });
+
+                    //start but
+                    $('#condition-start-button').hover(function() {
+                        $(this).css({
+                            'background': '#78DCE8',
+                            'color': '#FFF'
+                        });
+                    }, function() {
+                        $(this).css({
+                            'background': '#BEBEBE',
+                            'color': '#606060'
+                        });
+                    });
+
+                    //enable start button
+                    $('#condition-start-button').prop('disabled', false);
+                    
+
+                    //stop qTimer and tTimer
+                    clearInterval(qTimer);
+                    clearInterval(tTimer);
+                });
             }
         }
     });
