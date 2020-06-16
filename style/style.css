@@ -39,9 +39,10 @@ button, input[type=button] {
 
 button:hover, button:focus, 
 input[type=button]:hover, input[type=button]:focus{
-    background: hotpink;
+    background: #78DCE8;
     color: #fff;
 }
+
 
 button:focus, input[type=button]:focus {
     outline: 1px solid #fff;
@@ -202,6 +203,11 @@ h1 {
 #right-display-control input {
     display: block;
     margin: 0 auto;
+}
+
+#reset-button {
+    background: #BEBEBE;
+    color: #606060;
 }
 
 /* footer */
