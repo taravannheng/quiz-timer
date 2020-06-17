@@ -1,16 +1,18 @@
 $(document).ready(function() {
     /*
         Next Updates:
-            start button effect
-                disable hover effect by default
-                disable hover effect if inputs are invalid
-                disable hover effect after timer starts
-                only enable hover effect if inputs are valid        
+            support decimal for duration    
     */
 
     ///////////////////////// validation function /////////////////////////
-    
-    function checkInput() {
+
+    //disable start button
+    $('#start-button').prop('disabled', true);
+
+    //enable start button again after input values change
+    $('#no-question, #duration').keyup(function() {
+        //testing
+        
         //fetch input values
         $noQuestionVal = $("#no-question").val();
         $durationVal = $("#duration").val();
@@ -19,38 +21,43 @@ $(document).ready(function() {
         $noQuestionVal = parseInt($noQuestionVal);
         $durationVal = parseInt($durationVal);
 
-        //check input validation
         if ($noQuestionVal > 0 && $durationVal > 0) {
+            console.log("valid");
+
             //enable start button
-            $('#start-button').prop('disabled', false);
+             $('#start-button').prop('disabled', false);
+
+            $('#start-button').hover(function() {
+                $(this).css({
+                    'background': '#78DCE8',
+                    'color': '#FFF'
+                });
+            }, function() {
+                $(this).css({
+                    'background': '#BEBEBE',
+                    'color': '#606060'
+                });
+            });
         }
         else {
+            console.log('invalid');
+
             //disable start button
             $('#start-button').prop('disabled', true);
         }
-    }
-
-    //check input values once start button is hovered
-    $('#start-button').hover(checkInput);
-
-    //enable start button again after input values change
-    $('#no-question, #duration').on("focus", function() {
-        //enable start button
-        $('#start-button').prop('disabled', false);
-
-    });
-
-    //enable start button again after input values change
-    $('#no-question, #duration').keypress(function() {
-        //enable start button
-        $('#start-button').prop('disabled', false);
-
+        //end testing
     });
 
 
     ///////////////////////// timer function /////////////////////////
 
     $('#start-button').on("click", function() {
+
+        //change start button hover effect to default
+        $('#start-button').css({
+            'background': '#BEBEBE',
+            'color': '#606060'
+        });
 
         //disable start button
         $('#start-button').prop('disabled', true);
@@ -200,9 +207,6 @@ $(document).ready(function() {
                             'color': '#606060'
                         });
                     });
-
-                    //enable start button
-                    $('#start-button').prop('disabled', false);
 
                     //stop qTimer and tTimer
                     clearInterval($qTimer);
