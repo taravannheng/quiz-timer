@@ -11,8 +11,6 @@ $(document).ready(function() {
 
     //enable start button again after input values change
     $('#no-question, #duration').keyup(function() {
-        //testing
-        
         //fetch input values
         $noQuestionVal = $("#no-question").val();
         $durationVal = $("#duration").val();
@@ -22,8 +20,6 @@ $(document).ready(function() {
         $durationVal = parseInt($durationVal);
 
         if ($noQuestionVal > 0 && $durationVal > 0) {
-            console.log("valid");
-
             //enable start button
              $('#start-button').prop('disabled', false);
 
@@ -40,12 +36,9 @@ $(document).ready(function() {
             });
         }
         else {
-            console.log('invalid');
-
             //disable start button
             $('#start-button').prop('disabled', true);
         }
-        //end testing
     });
 
 
