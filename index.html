@@ -12,37 +12,40 @@
     <title>Quiz Timer</title>
 </head>
 <body>
-    <div id="header">
+    <header>
         <h1>Quiz Timer</h1>
-    </div>
-    <div id="body">
-        <div id="condition-container">
+    </header>
+
+    <section id="body">
+        <section id="condition-container">
             <div id="form-container">
                 <input type="text" id="no-question" placeholder="Number of Questions"><br />
                 <input type="text" id="duration" placeholder="Duration in MN"><br />
                 <input type="button" id="start-button" value="START"><br />
             </div>
-        </div>
-        <div id="display-container">
-            <div id="display-container-top">
+        </section>
+        <section id="display-container">
+            <section id="display-container-top">
                 <div id="display-container-top-left">
                     <span id="question-displayer">Q0</span>
                 </div>
                 <div id="display-container-top-right">
                     <span id="time-displayer">0</span>
                 </div>
-            </div>
-            <div id="display-container-bottom">
+            </section>
+            <section id="display-container-bottom">
                 <div id="left-display-details">
                     <p><span id="no-question-extract">0</span> Qs | <span id="duration-extract">0</span> MNs</p>
                 </div>
                 <div id="right-display-control">
                     <input type="button" id="reset-button" value="RESET" disabled>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div id="footer"></div>
+            </section>
+        </section>
+    </section>
+
+    <footer>
+    </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="script/script.js"></script>
