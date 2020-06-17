@@ -1,118 +1,61 @@
 $(document).ready(function() {
     /*
         Next Updates:
-            decimal timePerQ - handle timePerQ in case it is decimal
-            input validation - check for 0 and negative values
-
-        Bug:    
-            start button shows wrong color after one successful validation
-                i.e.    insert 2 and 2 into inputs
-                        hover on start
-                        then delete the 2 in duration input
-                        hover on start again, start shows blue color when it should shows grey
+            start button effect
+                disable hover effect by default
+                disable hover effect if inputs are invalid
+                disable hover effect after timer starts
+                only enable hover effect if inputs are valid        
     */
 
-    //validation function here
+    ///////////////////////// validation function /////////////////////////
     
     function checkInput() {
-        //grab number of questions input's value
+        //fetch input values
         $noQuestionVal = $("#no-question").val();
-        //grab duration input's value
         $durationVal = $("#duration").val();
-        
-        
-        //check input validation
-        
-        if ($noQuestionVal > 0 && $durationVal > 0) {
-            console.log("valid");
 
+        //convert str to int
+        $noQuestionVal = parseInt($noQuestionVal);
+        $durationVal = parseInt($durationVal);
+
+        //check input validation
+        if ($noQuestionVal > 0 && $durationVal > 0) {
             //enable start button
             $('#start-button').prop('disabled', false);
-
-            $('#start-button').hover(function() {
-                $(this).css({
-                    'background': '#78DCE8',
-                    'color': '#FFF'
-                });
-            }, function() {
-                $(this).css({
-                    'background': '#BEBEBE',
-                    'color': '#606060'
-                });
-            });
         }
         else {
-            console.log("invalid");
-
-            $('#start-button').css({
-                'background': '#BEBEBE',
-                'color': '#606060'
-            });
-
             //disable start button
             $('#start-button').prop('disabled', true);
         }
     }
 
-    $('#start-button').hover(checkInput, function() {
-            $(this).css({
-                'background': '#BEBEBE',
-                'color': '#606060'
-            });
-        });
+    //check input values once start button is hovered
+    $('#start-button').hover(checkInput);
 
     //enable start button again after input values change
     $('#no-question, #duration').on("focus", function() {
         //enable start button
         $('#start-button').prop('disabled', false);
-    });
 
+    });
 
     //enable start button again after input values change
     $('#no-question, #duration').keypress(function() {
         //enable start button
         $('#start-button').prop('disabled', false);
 
-        $('#start-button').hover(function() {
-            $noQuestionVal = $("#no-question").val();
-            $durationVal = $("#duration").val();
-
-            if ($noQuestionVal > 0 && $durationVal > 0) {
-                $(this).css({
-                    'background': '#78DCE8',
-                    'color': '#FFF'
-                });
-            }
-            else {
-                $(this).css({
-                    'background': '#BEBEBE',
-                    'color': '#606060'
-                });
-            }
-        }, function() {
-            $(this).css({
-                'background': '#BEBEBE',
-                'color': '#606060'
-            });
-        });
     });
 
-    
 
+    ///////////////////////// timer function /////////////////////////
 
-    //timer function
     $('#start-button').on("click", function() {
 
         //disable start button
         $('#start-button').prop('disabled', true);
 
-        //change start button color to #A9A9A9 to disable the hover and focus effect
-        $('#start-button').css({
-            'background': '#BEBEBE',
-            'color': '#606060'
-        });
-
-        //change reset button color to #FF6188 in hover and #BEBEBE out hover
+        //toggle reset button colors
         $('#reset-button').hover(function() {
             $(this).css({
                 'background': '#FF6188',
@@ -128,41 +71,42 @@ $(document).ready(function() {
         //enable reset button
         $('#reset-button').prop('disabled', false);
 
-        
-
-        //fetch condition details
-        var noQuestion = $('#no-question').val();
-        var duration = $('#duration').val();
+        //fetch input values
+        $noQuestionVal = $('#no-question').val();
+        $durationVal = $('#duration').val();
 
         //convert str to int
-        noQuestion = parseInt(noQuestion);
-        duration = parseInt(duration);
+        $noQuestionVal = parseInt($noQuestionVal);
+        $durationVal = parseInt($durationVal);
+
+        //round decimals to integers
+        $durationVal = Math.round($durationVal);
 
         //revert condition details to defaults
         $('#no-question').val("");
         $('#duration').val("");
 
         //operation: question/time
-        var timePerQ = (duration / noQuestion) * 60;
+        $timePerQ = ($durationVal / $noQuestionVal) * 60;
 
         //update display extract
-        $('#no-question-extract').text(noQuestion);
-        $('#duration-extract').text(duration);
+        $('#no-question-extract').text($noQuestionVal);
+        $('#duration-extract').text($durationVal);
 
         //updates question displayer
         $('#question-displayer').css('color', '#606060');
         $('#left-display-details p').css('color', '#606060');
 
-        var i = 0;
+        $i = 0;
     
         qCountdown();   //start the interval manually for the first time
 
-        var qTimer = setInterval(qCountdown, timePerQ*1000);
+        $qTimer = setInterval(qCountdown, $timePerQ*1000);
 
         function qCountdown() {
-            i++;
+            $i++;
 
-            if (i > noQuestion) {
+            if ($i > $noQuestionVal) {
                 //reset question displayer to default
                 $('#question-displayer').text("Q0");
 
@@ -183,39 +127,39 @@ $(document).ready(function() {
                 $('#start-button').prop('disabled', false);
 
                 //stop the timer
-                clearInterval(qTimer);
+                clearInterval($qTimer);
             } else {
-                $('#question-displayer').text("Q" + i);
-                $('#time-displayer').text(timePerQ);
+                $('#question-displayer').text("Q" + $i);
+                $('#time-displayer').text($timePerQ);
 
                 $('#time-displayer').css('color', '#A9DC76');
 
                 //tTimer section
-                var j = 1;
-                var timePerPhase = timePerQ / 3;
+                $j = 1;
+                $timePerPhase = $timePerQ / 3;
 
-                var tTimer = setInterval(tCountdown, 1000);
+                $tTimer = setInterval(tCountdown, 1000);
 
                 function tCountdown() {
-                    if (j == timePerQ) {
-                        if (i <= noQuestion) {
+                    if ($j == $timePerQ) {
+                        if ($i <= $noQuestionVal) {
                             //reset the timer
-                            $('#time-displayer').text(timePerQ);
+                            $('#time-displayer').text($timePerQ);
                         } else {
                             $('#time-displayer').text(0);
                         }
                         
                         //stop the timer
-                        clearInterval(tTimer);
+                        clearInterval($tTimer);
                     } else {
                         //displayer time availble per question
-                        $('#time-displayer').text(timePerQ - j);
+                        $('#time-displayer').text($timePerQ - $j);
 
                         //change color for each phase
-                        if ((timePerQ - j) > (timePerPhase * 2)) {
+                        if (($timePerQ - $j) > ($timePerPhase * 2)) {
                             $('#time-displayer').css('color', '#A9DC76');
                         }
-                        else if ((timePerQ - j) > (timePerPhase) && (timePerQ - j) <= (timePerPhase * 2)) {
+                        else if (($timePerQ - $j) > ($timePerPhase) && ($timePerQ - $j) <= ($timePerPhase * 2)) {
                             $('#time-displayer').css('color', '#FFD866');
                         }
                         else {
@@ -223,7 +167,7 @@ $(document).ready(function() {
                         }
                     
                         //increment
-                        j++;
+                        $j++;
                     }
                 }
 
@@ -244,21 +188,8 @@ $(document).ready(function() {
                     //reset extracts colors to default
                     $('#left-display-details p').css('color', '#A9A9A9');
 
-                    //reset reset button to default
+                    //disable reset button effect
                     $('#reset-button').hover(function() {
-                        $(this).css({
-                            'background': '#BEBEBE',
-                            'color': '#606060'
-                        });
-                    }, function() {
-                        $(this).css({
-                            'background': '#BEBEBE',
-                            'color': '#606060'
-                        });
-                    });
-
-                    //start but
-                    $('#start-button').hover(function() {
                         $(this).css({
                             'background': '#BEBEBE',
                             'color': '#606060'
@@ -272,11 +203,10 @@ $(document).ready(function() {
 
                     //enable start button
                     $('#start-button').prop('disabled', false);
-                    
 
                     //stop qTimer and tTimer
-                    clearInterval(qTimer);
-                    clearInterval(tTimer);
+                    clearInterval($qTimer);
+                    clearInterval($tTimer);
                 });
             }
         }
