@@ -5,7 +5,10 @@ $(document).ready(function() {
             timer options 
                 choose timer in minutes or seconds
                     if minutes must be over 3 minutes so that each phase color can be applied
-                    if seconds must be over 3 seconds reasons same as above    
+                    if seconds must be over 3 seconds reasons same as above
+            enable javascript message
+                show messages instructing non javascript users on how to enable javascript
+                    messages for different browsers    
     */
 
     ///////////////////////// validation function /////////////////////////
