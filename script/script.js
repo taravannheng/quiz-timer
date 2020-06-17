@@ -1,7 +1,11 @@
 $(document).ready(function() {
     /*
         Next Updates:
-            support decimal for duration    
+            support decimal for duration
+            timer options 
+                choose timer in minutes or seconds
+                    if minutes must be over 3 minutes so that each phase color can be applied
+                    if seconds must be over 3 seconds reasons same as above    
     */
 
     ///////////////////////// validation function /////////////////////////
