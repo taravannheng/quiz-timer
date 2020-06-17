@@ -3,7 +3,99 @@ $(document).ready(function() {
         Next Updates:
             decimal timePerQ - handle timePerQ in case it is decimal
             input validation - check for 0 and negative values
+
+        Bug:    
+            start button shows wrong color after one successful validation
+                i.e.    insert 2 and 2 into inputs
+                        hover on start
+                        then delete the 2 in duration input
+                        hover on start again, start shows blue color when it should shows grey
     */
+
+    //validation function here
+    
+    function checkInput() {
+        //grab number of questions input's value
+        $noQuestionVal = $("#no-question").val();
+        //grab duration input's value
+        $durationVal = $("#duration").val();
+        
+        
+        //check input validation
+        
+        if ($noQuestionVal > 0 && $durationVal > 0) {
+            console.log("valid");
+
+            //enable start button
+            $('#start-button').prop('disabled', false);
+
+            $('#start-button').hover(function() {
+                $(this).css({
+                    'background': '#78DCE8',
+                    'color': '#FFF'
+                });
+            }, function() {
+                $(this).css({
+                    'background': '#BEBEBE',
+                    'color': '#606060'
+                });
+            });
+        }
+        else {
+            console.log("invalid");
+
+            $('#start-button').css({
+                'background': '#BEBEBE',
+                'color': '#606060'
+            });
+
+            //disable start button
+            $('#start-button').prop('disabled', true);
+        }
+    }
+
+    $('#start-button').hover(checkInput, function() {
+            $(this).css({
+                'background': '#BEBEBE',
+                'color': '#606060'
+            });
+        });
+
+    //enable start button again after input values change
+    $('#no-question, #duration').on("focus", function() {
+        //enable start button
+        $('#start-button').prop('disabled', false);
+    });
+
+
+    //enable start button again after input values change
+    $('#no-question, #duration').keypress(function() {
+        //enable start button
+        $('#start-button').prop('disabled', false);
+
+        $('#start-button').hover(function() {
+            $noQuestionVal = $("#no-question").val();
+            $durationVal = $("#duration").val();
+
+            if ($noQuestionVal > 0 && $durationVal > 0) {
+                $(this).css({
+                    'background': '#78DCE8',
+                    'color': '#FFF'
+                });
+            }
+            else {
+                $(this).css({
+                    'background': '#BEBEBE',
+                    'color': '#606060'
+                });
+            }
+        }, function() {
+            $(this).css({
+                'background': '#BEBEBE',
+                'color': '#606060'
+            });
+        });
+    });
 
     
 
@@ -168,8 +260,8 @@ $(document).ready(function() {
                     //start but
                     $('#start-button').hover(function() {
                         $(this).css({
-                            'background': '#78DCE8',
-                            'color': '#FFF'
+                            'background': '#BEBEBE',
+                            'color': '#606060'
                         });
                     }, function() {
                         $(this).css({

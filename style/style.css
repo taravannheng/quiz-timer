@@ -37,12 +37,12 @@ button, input[type=button] {
      -moz-box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
 }
 
+
 button:hover, button:focus, 
 input[type=button]:hover, input[type=button]:focus{
     background: #78DCE8;
     color: #fff;
 }
-
 
 button:focus, input[type=button]:focus {
     outline: 1px solid #fff;
