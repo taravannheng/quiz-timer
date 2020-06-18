@@ -8,7 +8,13 @@ $(document).ready(function() {
                 also add a small text below the timer to indication minutes or seconds
             enable javascript message
                 show messages instructing non javascript users on how to enable javascript
-                    messages for different browsers    
+                    messages for different browsers
+                    
+        Bugs: 
+            time displayer 
+                if number of questions is 1
+                   duration is 1
+                then time displayer reset to 60 instead of 0
     */
 
     ///////////////////////// validation function /////////////////////////
