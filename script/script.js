@@ -2,10 +2,10 @@ $(document).ready(function() {
     /*
         Next Updates:
             support decimal for duration
-            timer options 
-                choose timer in minutes or seconds
-                    if minutes must be over 3 minutes so that each phase color can be applied
-                    if seconds must be over 3 seconds reasons same as above
+            timer display
+                if more than 1 minute shows in minutes
+                else shows in seconds
+                also add a small text below the timer to indication minutes or seconds
             enable javascript message
                 show messages instructing non javascript users on how to enable javascript
                     messages for different browsers    
