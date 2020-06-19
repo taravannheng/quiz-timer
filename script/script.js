@@ -9,12 +9,6 @@ $(document).ready(function() {
             enable javascript message
                 show messages instructing non javascript users on how to enable javascript
                     messages for different browsers
-                    
-        Bugs: 
-            time displayer 
-                if number of questions is 1
-                   duration is 1
-                then time displayer reset to 60 instead of 0
     */
 
     ///////////////////////// validation function /////////////////////////
@@ -68,7 +62,7 @@ $(document).ready(function() {
         //disable start button
         $('#start-button').prop('disabled', true);
 
-        //toggle reset button colors
+        //enable reset button hover effect
         $('#reset-button').hover(function() {
             $(this).css({
                 'background': '#FF6188',
@@ -91,9 +85,6 @@ $(document).ready(function() {
         //convert str to int
         $noQuestionVal = parseInt($noQuestionVal);
         $durationVal = parseInt($durationVal);
-
-        //round decimals to integers
-        $durationVal = Math.round($durationVal);
 
         //revert condition details to defaults
         $('#no-question').val("");
@@ -155,7 +146,7 @@ $(document).ready(function() {
 
                 function tCountdown() {
                     if ($j == $timePerQ) {
-                        if ($i <= $noQuestionVal) {
+                        if ($i < $noQuestionVal) {
                             //reset the timer
                             $('#time-displayer').text($timePerQ);
                         } else {
