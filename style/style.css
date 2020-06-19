@@ -98,14 +98,14 @@ h1 {
     border-right: 1px solid #606060;
 }
 
-#condition-container #form-container {
+#form-container {
     width: 80%;
 
     margin: 0 auto;
     margin-top: 50px;
 }
 
-#form-container #start-button {
+#start-button {
     display: block;
     margin: 0 auto;
     margin-top: 5px;
@@ -120,20 +120,20 @@ h1 {
     display: inline-block;
 }
 
-#display-container #display-container-top {
+#display-container-top {
     width: 90%;
     height: 150px;
 
     margin: 0 auto;
 }
 
-#display-container-top #display-container-top-left {
+#display-container-top-left {
     width: 45%;
 
     float: left;
 }
 
-#display-container-top #display-container-top-right {
+#display-container-top-right {
     width: 45%;
 
     float: right;
