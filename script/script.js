@@ -9,6 +9,9 @@ $(document).ready(function() {
             enable javascript message
                 show messages instructing non javascript users on how to enable javascript
                     messages for different browsers
+
+        Bugs:
+            
     */
 
     ///////////////////////// validation function /////////////////////////
@@ -26,26 +29,37 @@ $(document).ready(function() {
         $noQuestionVal = parseInt($noQuestionVal);
         $durationVal = parseInt($durationVal);
 
-        if ($noQuestionVal > 0 && $durationVal > 0) {
-            //enable start button
-             $('#start-button').prop('disabled', false);
+        //calculate timePerQ
+        $timePerQ = ($durationVal / $noQuestionVal) * 60;
 
-            $('#start-button').hover(function() {
-                $(this).css({
-                    'background': '#78DCE8',
-                    'color': '#FFF'
+        if ($timePerQ >= 3) {
+            if ($noQuestionVal > 0 && $durationVal > 0) {
+                //enable start button
+                 $('#start-button').prop('disabled', false);
+    
+                $('#start-button').hover(function() {
+                    $(this).css({
+                        'background': '#78DCE8',
+                        'color': '#FFF'
+                    });
+                }, function() {
+                    $(this).css({
+                        'background': '#BEBEBE',
+                        'color': '#606060'
+                    });
                 });
-            }, function() {
-                $(this).css({
-                    'background': '#BEBEBE',
-                    'color': '#606060'
-                });
-            });
+            }
+            else {
+                //disable start button
+                $('#start-button').prop('disabled', true);
+            }
         }
         else {
             //disable start button
             $('#start-button').prop('disabled', true);
         }
+
+        
     });
 
 
@@ -58,6 +72,11 @@ $(document).ready(function() {
             'background': '#BEBEBE',
             'color': '#606060'
         });
+
+        //disable form inputs
+        $('#no-question').prop('disabled', true);
+        $('#duration').prop('disabled', true);
+
 
         //disable start button
         $('#start-button').prop('disabled', true);
@@ -90,29 +109,36 @@ $(document).ready(function() {
         $('#no-question').val("");
         $('#duration').val("");
 
-        //operation: question/time
+        //calculate timePerQ in seconds
         $timePerQ = ($durationVal / $noQuestionVal) * 60;
 
         //update display extract
         $('#no-question-extract').text($noQuestionVal);
         $('#duration-extract').text($durationVal);
 
-        //updates question displayer
+        //updates question displayer colors
         $('#question-displayer').css('color', '#606060');
+
+        //update display extract colors
         $('#left-display-details p').css('color', '#606060');
 
-        $i = 0;
+        $i = 1;
     
         qCountdown();   //start the interval manually for the first time
 
         $qTimer = setInterval(qCountdown, $timePerQ*1000);
 
         function qCountdown() {
-            $i++;
-
             if ($i > $noQuestionVal) {
+                //enable form inputs - passed
+                $('#no-question').prop('disabled', false);
+                $('#duration').prop('disabled', false);
+
                 //reset question displayer to default
                 $('#question-displayer').text("Q0");
+
+                //reset time displayer to default
+                $('#time-displayer').text("0");
 
                 //reset extracts to default
                 $('#no-question-extract').text(0);
@@ -127,56 +153,57 @@ $(document).ready(function() {
                 //reset time displayer color to default
                 $('#time-displayer').css('color', '#A9A9A9');
 
-                //enable start button
-                $('#start-button').prop('disabled', false);
+                //disable reset button
+                $('#reset-button').prop('disabled', true);
 
-                //stop the timer
+                //stop both timers
+                clearInterval($tTimer);
                 clearInterval($qTimer);
             } else {
+                //update question displayer
                 $('#question-displayer').text("Q" + $i);
-                $('#time-displayer').text($timePerQ);
-
-                $('#time-displayer').css('color', '#A9DC76');
 
                 //tTimer section
-                $j = 1;
+                $j = 0;
                 $timePerPhase = $timePerQ / 3;
+
+                //start $tTimer manually for the first time
+                tCountdown();
 
                 $tTimer = setInterval(tCountdown, 1000);
 
                 function tCountdown() {
-                    if ($j == $timePerQ) {
-                        if ($i < $noQuestionVal) {
-                            //reset the timer
-                            $('#time-displayer').text($timePerQ);
-                        } else {
-                            $('#time-displayer').text(0);
-                        }
-                        
-                        //stop the timer
-                        clearInterval($tTimer);
-                    } else {
-                        //displayer time availble per question
-                        $('#time-displayer').text($timePerQ - $j);
+                    //displayer time availble per question
+                    $('#time-displayer').text($timePerQ - $j);
 
-                        //change color for each phase
-                        if (($timePerQ - $j) > ($timePerPhase * 2)) {
-                            $('#time-displayer').css('color', '#A9DC76');
-                        }
-                        else if (($timePerQ - $j) > ($timePerPhase) && ($timePerQ - $j) <= ($timePerPhase * 2)) {
-                            $('#time-displayer').css('color', '#FFD866');
-                        }
-                        else {
+                    //change color for each phase
+                    if (($timePerQ - $j) > ($timePerPhase * 2)) {
+                        $('#time-displayer').css('color', '#A9DC76');
+                    } else if (($timePerQ - $j) > ($timePerPhase) && ($timePerQ - $j) <= ($timePerPhase * 2)) {
+                        $('#time-displayer').css('color', '#FFD866');
+                    } else {
                             $('#time-displayer').css('color', '#FF6188');
-                        }
-                    
-                        //increment
-                        $j++;
+                    }
+
+                    //increment $j
+                    $j++;
+
+                    //increment $i
+                    if ($j == $timePerQ) {
+                        $i++;
+                        clearInterval($tTimer);
                     }
                 }
 
                 //reset button function
                 $('#reset-button').on('click', function() {
+                    
+                    //testing
+                    //enable form inputs - passed
+                    $('#no-question').prop('disabled', false);
+                    $('#duration').prop('disabled', false);
+                    //end testing
+
                     //reset question and time displayers to default
                     $('#question-displayer').text("Q0");
                     $('#time-displayer').text(0);
@@ -205,9 +232,9 @@ $(document).ready(function() {
                         });
                     });
 
-                    //stop qTimer and tTimer
-                    clearInterval($qTimer);
+                    //stop both timers
                     clearInterval($tTimer);
+                    clearInterval($qTimer);
                 });
             }
         }
