@@ -2,8 +2,8 @@ $(document).ready(function() {
     /*
         Next Updates:
             support decimal for duration
-            display extract
-                display extract in minutes or hours
+            display details
+                if duration is more than 60 minutes then show as hours
             time indicator
                 display time indicator in hours if over 60 minutes
             enable javascript message
@@ -128,7 +128,7 @@ $(document).ready(function() {
 
         function qCountdown() {
             if ($i > $noQuestionVal) {
-                //enable form inputs - passed
+                //enable form inputs
                 $('#no-question').prop('disabled', false);
                 $('#duration').prop('disabled', false);
 
@@ -138,10 +138,8 @@ $(document).ready(function() {
                 //reset time displayer to default
                 $('#time-displayer').text("0");
 
-                //testing
                 //reset time indicator to default
-                $('#time-indicator').text('');
-                //end testing
+                $('#time-indicator').text('');                
 
                 //reset extracts to default
                 $('#no-question-extract').text(0);
@@ -156,10 +154,8 @@ $(document).ready(function() {
                 //reset time displayer color to default
                 $('#time-displayer').css('color', '#A9A9A9');
 
-                //testing
                 //reset time indicator color to default
                 $('#time-indicator').css('color', '#A9A9A9');
-                //end testing
 
                 //disable reset button
                 $('#reset-button').prop('disabled', true);
@@ -181,27 +177,39 @@ $(document).ready(function() {
                 $tTimer = setInterval(tCountdown, 1000);
 
                 function tCountdown() {
-                    //testing (remove)
-                    //display time displayer
-                    //$('#time-displayer').text($timePerQ - $j);
-                    //end testing
-
-                    //testing
                     if (($timePerQ - $j) >= 60) {
                         //calculate time available in minutes
                         $timeAvailMN = ($timePerQ - $j) / 60;
 
                         //convert decimal to int
                         $timeAvailMN = parseInt($timeAvailMN);
-
-                        //display timer in minutes
-                        $('#time-displayer').text($timeAvailMN);
                         
                         //display time indicator in minutes
-                        if ($timeAvailMN > 1) {
-                            $('#time-indicator').text('minutes');
-                        } else {
-                            $('#time-indicator').text('minute');
+                        if ($timeAvailMN >= 60) {
+                            //calculate time available in hours
+                            $timeAvailHR = $timeAvailMN / 60;
+
+                            //convert decimal to int
+                            $timeAvailHR = parseInt($timeAvailHR);
+
+                            //display timer in hours
+                            $('#time-displayer').text($timeAvailHR);
+
+                            if ($timeAvailHR > 1) {
+                                $('#time-indicator').text('hours');
+                            } else {
+                                $('#time-indicator').text('hour');
+                            }
+                        }
+                        else {
+                            //display timer in minutes
+                            $('#time-displayer').text($timeAvailMN);
+
+                            if ($timeAvailMN > 1) {
+                                $('#time-indicator').text('minutes');
+                            } else {
+                                $('#time-indicator').text('minute');
+                            }
                         } 
                     } else {
                         //display timer in seconds
@@ -214,7 +222,6 @@ $(document).ready(function() {
                             $('#time-indicator').text('second');
                         }
                     }
-                    //end testing
 
                     //change color for each phase
                     if (($timePerQ - $j) > ($timePerPhase * 2)) {
@@ -243,12 +250,9 @@ $(document).ready(function() {
 
                 //reset button function
                 $('#reset-button').on('click', function() {
-                    
-                    //testing
                     //enable form inputs - passed
                     $('#no-question').prop('disabled', false);
                     $('#duration').prop('disabled', false);
-                    //end testing
 
                     //reset question displayer to default
                     $('#question-displayer').text("Q0");
@@ -256,11 +260,8 @@ $(document).ready(function() {
                     //reset time displayer to default
                     $('#time-displayer').text(0);
 
-                    //testing
                     //reset time indicator to default
                     $('#time-indicator').text('');
-                    //end testing
-
 
                     //reset extracts to default
                     $('#no-question-extract').text(0);
@@ -272,10 +273,8 @@ $(document).ready(function() {
                     //reset time displayer color to default
                     $('#time-displayer').css('color', '#A9A9A9');
 
-                    //testing
                     //reset time indicator color to default
                     $('#time-indicator').css('color', '#A9A9A9');
-                    //end testing
 
                     //reset extracts colors to default
                     $('#left-display-details p').css('color', '#A9A9A9');
