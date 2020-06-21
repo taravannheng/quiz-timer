@@ -4,6 +4,8 @@ $(document).ready(function() {
             support decimal for duration
             display extract
                 display extract in minutes or hours
+            time indicator
+                display time indicator in hours if over 60 minutes
             enable javascript message
                 show messages instructing non javascript users on how to enable javascript
                     messages for different browsers
