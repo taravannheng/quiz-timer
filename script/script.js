@@ -2,10 +2,8 @@ $(document).ready(function() {
     /*
         Next Updates:
             support decimal for duration
-            timer display
-                if more than 1 minute shows in minutes
-                else shows in seconds
-                also add a small text below the timer to indication minutes or seconds
+            display extract
+                display extract in minutes or hours
             enable javascript message
                 show messages instructing non javascript users on how to enable javascript
                     messages for different browsers
@@ -138,6 +136,11 @@ $(document).ready(function() {
                 //reset time displayer to default
                 $('#time-displayer').text("0");
 
+                //testing
+                //reset time indicator to default
+                $('#time-indicator').text('');
+                //end testing
+
                 //reset extracts to default
                 $('#no-question-extract').text(0);
                 $('#duration-extract').text(0);
@@ -150,6 +153,11 @@ $(document).ready(function() {
 
                 //reset time displayer color to default
                 $('#time-displayer').css('color', '#A9A9A9');
+
+                //testing
+                //reset time indicator color to default
+                $('#time-indicator').css('color', '#A9A9A9');
+                //end testing
 
                 //disable reset button
                 $('#reset-button').prop('disabled', true);
@@ -171,16 +179,54 @@ $(document).ready(function() {
                 $tTimer = setInterval(tCountdown, 1000);
 
                 function tCountdown() {
-                    //displayer time availble per question
-                    $('#time-displayer').text($timePerQ - $j);
+                    //testing (remove)
+                    //display time displayer
+                    //$('#time-displayer').text($timePerQ - $j);
+                    //end testing
+
+                    //testing
+                    if (($timePerQ - $j) >= 60) {
+                        //calculate time available in minutes
+                        $timeAvailMN = ($timePerQ - $j) / 60;
+
+                        //convert decimal to int
+                        $timeAvailMN = parseInt($timeAvailMN);
+
+                        //display timer in minutes
+                        $('#time-displayer').text($timeAvailMN);
+                        
+                        //display time indicator in minutes
+                        if ($timeAvailMN > 1) {
+                            $('#time-indicator').text('minutes');
+                        } else {
+                            $('#time-indicator').text('minute');
+                        } 
+                    } else {
+                        //display timer in seconds
+                        $('#time-displayer').text($timePerQ - $j);
+
+                        //display time indicator in seconds
+                        if (($timePerQ - $j) > 1) {
+                            $('#time-indicator').text('seconds');
+                        } else {
+                            $('#time-indicator').text('second');
+                        }
+                    }
+                    //end testing
 
                     //change color for each phase
                     if (($timePerQ - $j) > ($timePerPhase * 2)) {
+                        //color green
                         $('#time-displayer').css('color', '#A9DC76');
+                        $('#time-indicator').css('color', '#A9DC76');
                     } else if (($timePerQ - $j) > ($timePerPhase) && ($timePerQ - $j) <= ($timePerPhase * 2)) {
+                        //color yellow
                         $('#time-displayer').css('color', '#FFD866');
+                        $('#time-indicator').css('color', '#FFD866');
                     } else {
-                            $('#time-displayer').css('color', '#FF6188');
+                        //color red
+                        $('#time-displayer').css('color', '#FF6188');
+                        $('#time-indicator').css('color', '#FF6188');
                     }
 
                     //increment $j
@@ -202,17 +248,32 @@ $(document).ready(function() {
                     $('#duration').prop('disabled', false);
                     //end testing
 
-                    //reset question and time displayers to default
+                    //reset question displayer to default
                     $('#question-displayer').text("Q0");
+
+                    //reset time displayer to default
                     $('#time-displayer').text(0);
+
+                    //testing
+                    //reset time indicator to default
+                    $('#time-indicator').text('');
+                    //end testing
+
 
                     //reset extracts to default
                     $('#no-question-extract').text(0);
                     $('#duration-extract').text(0);
 
-                    //reset question and time displayers color to default
+                    //reset question displayer color to default
                     $('#question-displayer').css('color', '#A9A9A9');
+
+                    //reset time displayer color to default
                     $('#time-displayer').css('color', '#A9A9A9');
+
+                    //testing
+                    //reset time indicator color to default
+                    $('#time-indicator').css('color', '#A9A9A9');
+                    //end testing
 
                     //reset extracts colors to default
                     $('#left-display-details p').css('color', '#A9A9A9');
