@@ -58,8 +58,6 @@ $(document).ready(function() {
             //disable start button
             $('#start-button').prop('disabled', true);
         }
-
-        
     });
 
 
