@@ -1,16 +1,13 @@
 $(document).ready(function() {
     /*
         Next Updates:
-            support decimal for duration
-            display details
-                if duration is more than 60 minutes then show as hours
-            time indicator
-                display time indicator in hours if over 60 minutes
             enable javascript message
                 show messages instructing non javascript users on how to enable javascript
                     messages for different browsers
 
         Bugs:
+            duration extract
+                if duration is 130 then duration extract only shows 2 HRs when it should be 2 HRs 10 MNs
             
     */
 
@@ -75,7 +72,6 @@ $(document).ready(function() {
         $('#no-question').prop('disabled', true);
         $('#duration').prop('disabled', true);
 
-
         //disable start button
         $('#start-button').prop('disabled', true);
 
@@ -110,9 +106,27 @@ $(document).ready(function() {
         //calculate timePerQ in seconds
         $timePerQ = ($durationVal / $noQuestionVal) * 60;
 
-        //update display extract
-        $('#no-question-extract').text($noQuestionVal);
-        $('#duration-extract').text($durationVal);
+        //update question extract
+        if ($noQuestionVal > 1) {
+            $('#no-question-extract').text($noQuestionVal + " Qs");
+        } else {
+            $('#no-question-extract').text($noQuestionVal + " Q");
+        }
+
+        //update duration extract
+        if ($durationVal >= 60) {
+            if (($durationVal / 60) > 1) {
+                $('#duration-extract').text(parseInt($durationVal / 60) + " HRs");
+            } else {
+                $('#duration-extract').text(parseInt($durationVal / 60) + " HR");
+            }
+        } else {
+            if ($durationVal > 1) {
+                $('#duration-extract').text($durationVal + " MNs");
+            } else {
+                $('#duration-extract').text($durationVal + " MN");
+            }
+        }
 
         //updates question displayer colors
         $('#question-displayer').css('color', '#606060');
@@ -141,9 +155,11 @@ $(document).ready(function() {
                 //reset time indicator to default
                 $('#time-indicator').text('');                
 
-                //reset extracts to default
-                $('#no-question-extract').text(0);
-                $('#duration-extract').text(0);
+                //remove question extract
+                $('#no-question-extract').text("0 Q");
+
+                //remove duration extract
+                $('#duration-extract').text("0 MN");
 
                 //reset question displayer color to default
                 $('#question-displayer').css('color', '#A9A9A9');
@@ -263,9 +279,11 @@ $(document).ready(function() {
                     //reset time indicator to default
                     $('#time-indicator').text('');
 
-                    //reset extracts to default
-                    $('#no-question-extract').text(0);
-                    $('#duration-extract').text(0);
+                    //remove question extract
+                    $('#no-question-extract').text("0 Q");
+
+                    //remove duration extract
+                    $('#duration-extract').text("0 MN");
 
                     //reset question displayer color to default
                     $('#question-displayer').css('color', '#A9A9A9');
