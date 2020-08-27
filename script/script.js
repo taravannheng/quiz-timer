@@ -1,16 +1,4 @@
 $(document).ready(function() {
-    /*
-        Next Updates:
-            enable javascript message
-                show messages instructing non javascript users on how to enable javascript
-                    messages for different browsers
-
-        Bugs:
-            duration extract
-                if duration is 130 then duration extract only shows 2 HRs when it should be 2 HRs 10 MNs
-            
-    */
-
     ///////////////////////// validation function /////////////////////////
 
     //disable start button
