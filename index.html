@@ -7,23 +7,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/style.css">
     <title>Quiz Timer</title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="script/script.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Quiz Timer</h1>
+        <h1>Study Timer</h1>
     </header>
 
-    <section id="body">
-        <section id="condition-container">
-            <div id="form-container">
-                <input type="text" id="no-question" placeholder="Number of Questions"><br />
-                <input type="text" id="duration" placeholder="Duration in MN"><br />
-                <input type="button" id="start-button" value="START"><br />
-            </div>
+    <main>
+        <section id="form-container">
+            <!-- <div id="form-container"> -->
+            <form>
+                <input type="text" id="no-question" placeholder="Number of Questions">
+                <input type="text" id="duration" placeholder="Duration in MN">
+                <input type="button" id="start-button" value="start">
+            </form>
+            <!-- </div> -->
         </section>
-        <section id="display-container">
+
+        <section id="display-container"> <!-- change to timer container -->
             <section id="display-container-top">
                 <div id="display-container-top-left">
                     <span id="question-displayer">Q0</span>
@@ -33,6 +39,7 @@
                     <span id="time-indicator"></span>
                 </div>
             </section>
+
             <section id="display-container-bottom">
                 <div id="left-display-details">
                     <p><span id="no-question-extract">0 Q</span> | <span id="duration-extract">0 MN</span></p>
@@ -42,12 +49,8 @@
                 </div>
             </section>
         </section>
-    </section>
+    </main>
 
-    <footer>
-    </footer>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="script/script.js"></script>
+    
 </body>
 </html>
