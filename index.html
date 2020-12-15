@@ -11,8 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Quiz Timer</title>
-    <script src="script/script.js" defer></script>
+    <title>Study Timer</title>
+    <script src="scripts/script.js" defer></script>
 </head>
 <body>
     <header>
@@ -21,13 +21,17 @@
 
     <main>
         <section id="form-container">
-            <!-- <div id="form-container"> -->
             <form>
-                <input type="text" id="no-question" placeholder="Number of Questions">
-                <input type="text" id="duration" placeholder="Duration in MN">
-                <input type="button" id="start-button" value="start">
+                <div id="question-control" class="form-controls">
+                    <input type="text" id="no-question" required>
+                    <label>Number of Questions</label>
+                </div>
+                <div id="duration-control" class="form-controls">
+                    <input type="text" id="duration" required>
+                    <label>Duration</label>
+                </div>
+                <button id="start-button">start</button>
             </form>
-            <!-- </div> -->
         </section>
 
         <section id="display-container"> <!-- change to timer container -->
